@@ -1,43 +1,50 @@
 {
-  "name": "easy-image-resizer",
-  "version": "0.1.0",
-  "description": "Easy way how to resize image in one line in `browser`, `node` and `CLI`.",
-  "main": "lib/node.js",
-  "browser": "browser/browser.js",
-  "types": "browser/browser.d.ts",
-  "scripts": {
-    "example:node": "ts-node examples/node.ts",
-    "build": "npm run build:node && npm run build:browser",
-    "build:browser": "tsc src/browser.ts --outDir browser --module esnext --lib dom,es2015 --declaration --target es5 && npm run uglify:browser",
-    "build:node": "tsc src/node.ts --outDir lib --module CommonJS --declaration --target es2017 --esModuleInterop",
-    "uglify:browser": "uglifyjs browser/browser.js -c -m -o browser/browser.js && uglifyjs browser/image.js -c -m -o browser/image.js"
-  },
-  "devDependencies": {
-    "@types/sharp": "^0.28.0",
-    "eslint": "^7.24.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
-    "uglify-js": "^3.13.3"
-  },
-  "dependencies": {
-    "sharp": "^0.28.1"
-  },
-  "keywords": [
-    "easy&lite",
-    "image resizer",
-    "resize",
-    "browser",
-    "node",
-    "cli",
-    "TypeScript"
-  ],
-  "author": "Filip Paulů <ing.fenix@seznam.cz>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ingSlonik/easy-image-resizer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ingSlonik/easy-image-resizer/issues"
-  }
+    "name": "easy-image-resizer",
+    "version": "0.1.0",
+    "description": "Easy way to resize image in one line in `browser`, `node` and `CLI`.",
+    "main": "lib/node.js",
+    "browser": "browser/browser.js",
+    "types": "browser/browser.d.ts",
+    "bin": {
+        "resize-image": "./lib/cli.js"
+    },
+    "scripts": {
+        "example:node": "ts-node examples/node.ts",
+        "example:help": "ts-node src/cli.ts --help",
+        "example:cli": "ts-node src/cli.ts -i examples/1920x1080.jpg -o examples/small.png -h 32",
+        "build": "npm run build:node && npm run build:browser",
+        "build:browser": "tsc src/browser.ts --outDir browser --module esnext --lib dom,es2015 --declaration --target es5 && npm run uglify:browser",
+        "build:node": "tsc src/node.ts --outDir lib --module CommonJS --declaration --target es2017 --esModuleInterop",
+        "uglify:browser": "uglifyjs browser/browser.js -c -m -o browser/browser.js && uglifyjs browser/image.js -c -m -o browser/image.js"
+    },
+    "devDependencies": {
+        "@types/sharp": "^0.28.0",
+        "@types/yargs": "^16.0.1",
+        "eslint": "^7.24.0",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.4",
+        "uglify-js": "^3.13.3"
+    },
+    "dependencies": {
+        "sharp": "^0.28.1",
+        "yargs": "^16.2.0"
+    },
+    "keywords": [
+        "easy&lite",
+        "image resizer",
+        "resize",
+        "browser",
+        "node",
+        "cli",
+        "TypeScript"
+    ],
+    "author": "Filip Paulů <ing.fenix@seznam.cz>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ingSlonik/easy-image-resizer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ingSlonik/easy-image-resizer/issues"
+    }
 }

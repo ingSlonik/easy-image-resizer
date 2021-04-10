@@ -1,6 +1,6 @@
 # Easy image resizer
 
-Easy way how to resize image in one line in `browser`, `node` and `CLI`.
+Easy way to resize image in one line in `browser`, `node` and `CLI`.
 
 ## Usage
 
@@ -15,7 +15,7 @@ export type ResizeImageOptions = {
 
     smooth?: boolean,
     type?: "jpeg" | "png",
-    /** only with type "jpeg" and from 0 to 100 */
+    /** from 1 to 100 */
     quality?: number,
 };
 ```
@@ -29,7 +29,7 @@ import { resizeImage } from "easy-image-resizer";
 
 const url = await resizeImage(originalUrl, { width: 100, maxHeight: 250 });
 // or
-<input type="file" onChange={e => {
+<input type="file" onChange={async e => {
     image.url = await resizeImage(e.target.files[0], { maxWidth: 400, maxHeight: 300 });
 }}>
 ```
@@ -47,12 +47,30 @@ fs.writeFileSync("icon.png", image);
 
 ## CLI
 
+```
+$ resize-image --help
+
+Usage: resize-image --input image.jpeg --out small.jpeg --width 600
+
+Options:
+      --version           Show version number                          [boolean]
+  -i, --input             Path to input image                [string] [required]
+  -o, --output            Path to output image               [string] [required]
+  -w, --width             Width [px]                                    [number]
+  -h, --height            Height [px]                                   [number]
+      --max-width, --mw   Max width [px]                                [number]
+      --max-height, --mh  Max height [px]                               [number]
+  -q, --quality           Quality from 1 to 100                         [number]
+  -s, --smooth            Smoother resize processing   [boolean] [default: true]
+      --help              Show help                                    [boolean]
+```
+
 ### Without installation
 
 Only one dependence is `node`.
 
 ```
-$ npx easy-image-resizer bigImage.png --out smallImage.png --max-width 32
+$ npx easy-image-resizer -i bigImage.png -o smallImage.png --max-width 32
 ```
 
 ### With installation
@@ -64,5 +82,5 @@ $ npm install -g easy-image-resizer
 then you can write just
 
 ```
-$ resize-image bigImage.png --out icon.png --width 32 --height 32
+$ resize-image -i bigImage.png -o icon.png -h 64
 ```

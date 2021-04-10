@@ -1,0 +1,6 @@
+browser/
+examples/small.png
+lib/
+node_modules/
+.npmrc
+package-lock.json

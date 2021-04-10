@@ -1,6 +1,6 @@
 {
     "name": "easy-image-resizer",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Easy way to resize image in one line in `browser`, `node` and `CLI`.",
     "main": "lib/node.js",
     "browser": "browser/browser.js",
@@ -14,7 +14,7 @@
         "example:cli": "ts-node src/cli.ts -i examples/1920x1080.jpg -o examples/small.png -h 32",
         "build": "npm run build:node && npm run build:browser",
         "build:browser": "tsc src/browser.ts --outDir browser --module esnext --lib dom,es2015 --declaration --target es5 && npm run uglify:browser",
-        "build:node": "tsc src/node.ts --outDir lib --module CommonJS --declaration --target es2017 --esModuleInterop",
+        "build:node": "tsc src/cli.ts --outDir lib --module CommonJS --declaration --target es2017 --esModuleInterop",
         "uglify:browser": "uglifyjs browser/browser.js -c -m -o browser/browser.js && uglifyjs browser/image.js -c -m -o browser/image.js"
     },
     "devDependencies": {

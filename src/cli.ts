@@ -5,7 +5,7 @@ import yargs from "yargs";
 
 import { resizeImage, ResizeImageOptions } from "./node";
 
-const options = yargs
+const optionsPromise = yargs
     .scriptName("resize-image")
     .usage("Usage: $0 --input image.jpeg --out small.jpeg --width 600")
     .option("input", { alias: "i", describe: "Path to input image", type: "string" })
@@ -20,41 +20,47 @@ const options = yargs
     .help()
     .argv;
 
-const input = options.input;
-const output = options.output;
+async function main() {
+    const options = await optionsPromise;
 
-const ext = extname(input);
+    const input = options.input;
+    const output = options.output;
 
-let type: "png" | "jpeg" = "png";
-switch (ext) {
-    case ".png":
-        type = "png";
-        break;
-    case ".jpg":
-    case ".jpeg":
-        type = "jpeg";
-        break;
-    default:
-        console.log("Unknown output file type. There are allowed only 'jpg', 'jpeg' and 'png'.");
-        process.exit(1);
+    const ext = extname(input);
+
+    let type: "png" | "jpeg" = "png";
+    switch (ext) {
+        case ".png":
+            type = "png";
+            break;
+        case ".jpg":
+        case ".jpeg":
+            type = "jpeg";
+            break;
+        default:
+            console.log("Unknown output file type. There are allowed only 'jpg', 'jpeg' and 'png'.");
+            process.exit(1);
+    }
+
+
+    const resizeImageOptions: ResizeImageOptions = {
+        width: options["width"],
+        height: options["height"],
+        maxWidth: options["max-width"],
+        maxHeight: options["max-height"],
+        quality: options["quality"],
+        smooth: options["smooth"],
+        type,
+    };
+
+    console.log(`Input image: "${input}"`);
+    console.log(`Output format: "${type}"`);
+    console.log("Resizing...");
+
+    resizeImage(input, resizeImageOptions).then(outputImage => {
+        writeFileSync(output, outputImage);
+        console.log(`\nDone, resized image is in "${output}" :)`);
+    });
 }
 
-
-const resizeImageOptions: ResizeImageOptions = {
-    width: options["width"],
-    height: options["height"],
-    maxWidth: options["max-width"],
-    maxHeight: options["max-height"],
-    quality: options["quality"],
-    smooth: options["smooth"],
-    type,
-};
-
-console.log(`Input image: "${input}"`);
-console.log(`Output format: "${type}"`);
-console.log("Resizing...");
-
-resizeImage(input, resizeImageOptions).then(outputImage => {
-    writeFileSync(output, outputImage);
-    console.log(`\nDone, resized image is in "${output}" :)`);
-});
+main();

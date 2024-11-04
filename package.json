@@ -1,6 +1,6 @@
 {
     "name": "easy-image-resizer",
-    "version": "0.3.0",
+    "version": "1.0.0",
     "description": "Easy way to resize image in one line in `browser`, `node` and `CLI`.",
     "main": "lib/node.js",
     "browser": "browser/browser.js",

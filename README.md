@@ -14,7 +14,8 @@ export type ResizeImageOptions = {
     maxHeight?: number,
 
     smooth?: boolean,
-    type?: "jpeg" | "png",
+    /** png is default */
+    type?: "jpeg" | "png" | "webp",
     /** from 1 to 100 */
     quality?: number,
 };

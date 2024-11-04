@@ -28,7 +28,7 @@ async function main() {
 
     const ext = extname(input);
 
-    let type: "png" | "jpeg" = "png";
+    let type: "png" | "jpeg" | "webp" = "png";
     switch (ext) {
         case ".png":
             type = "png";
@@ -37,8 +37,11 @@ async function main() {
         case ".jpeg":
             type = "jpeg";
             break;
+        case ".webp":
+            type = "webp";
+            break;
         default:
-            console.log("Unknown output file type. There are allowed only 'jpg', 'jpeg' and 'png'.");
+            console.log("Unknown output file type. There are allowed only 'jpg', 'jpeg', 'png' and 'webp'.");
             process.exit(1);
     }
 
@@ -57,10 +60,10 @@ async function main() {
     console.log(`Output format: "${type}"`);
     console.log("Resizing...");
 
-    resizeImage(input, resizeImageOptions).then(outputImage => {
-        writeFileSync(output, outputImage);
-        console.log(`\nDone, resized image is in "${output}" :)`);
-    });
+    const outputImage = await resizeImage(input, resizeImageOptions)
+    writeFileSync(output, outputImage);
+
+    console.log(`\nDone, resized image is in "${output}" :)`);
 }
 
 main();

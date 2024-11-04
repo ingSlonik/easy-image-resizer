@@ -13,7 +13,7 @@
         "example:help": "ts-node src/cli.ts --help",
         "example:cli": "ts-node src/cli.ts -i examples/1920x1080.jpg -o examples/small.png -h 32",
         "build": "npm run build:node && npm run build:browser",
-        "build:browser": "tsc src/browser.ts --outDir browser --module esnext --lib dom,es2015 --declaration --target es5 && npm run uglify:browser",
+        "build:browser": "tsc src/browser.ts --outDir browser --module NodeNext --lib dom,es2015 --declaration --target es5 --moduleResolution nodenext && npm run uglify:browser",
         "build:node": "tsc src/cli.ts --outDir lib --module CommonJS --declaration --target es2017 --esModuleInterop",
         "uglify:browser": "uglifyjs browser/browser.js -c -m -o browser/browser.js && uglifyjs browser/image.js -c -m -o browser/image.js"
     },
@@ -25,7 +25,7 @@
         "uglify-js": "^3.17.4"
     },
     "dependencies": {
-        "sharp": "^0.33.3",
+        "sharp": "^0.33.5",
         "yargs": "^17.7.2"
     },
     "keywords": [

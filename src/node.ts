@@ -26,6 +26,9 @@ export async function resizeImage(fileOrUrl: Buffer | string, options: ResizeIma
         case "jpeg":
             image = image.jpeg({ quality: opt.quality });
             break;
+        case "webp":
+            image = image.webp({ quality: opt.quality });
+            break;
     }
 
     return await image.toBuffer();

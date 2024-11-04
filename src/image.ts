@@ -7,7 +7,7 @@ export type SizeDefinition = {
 
 export type ResizeImageOptions = SizeDefinition & {
     smooth?: boolean,
-    type?: "jpeg" | "png",
+    type?: "jpeg" | "png" | "webp",
     /** from 1 to 100 */
     quality?: number,
 };
